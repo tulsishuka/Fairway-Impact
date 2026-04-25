@@ -1,20 +1,4 @@
 
-// import axios from "axios";
-
-// export const createOrder = async (payload) => {
-//   const token = localStorage.getItem("token");
-
-//   return axios.post(
-//     "http://localhost:3000/api/payment/create-order",
-//     payload,
-//     {
-//       headers: {
-//         Authorization: `Bearer ${token}`, // 🔥 THIS WAS MISSING
-//       },
-//     }
-//   );
-// };
-
 import axios from "axios";
 
 const BASE_URL = "http://localhost:3000/api";

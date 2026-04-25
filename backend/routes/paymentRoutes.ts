@@ -1,21 +1,10 @@
-// import express from "express";
-// import { createOrder } from "../controllers/paymentController";
-// import { protectedMiddleware } from "../middlewares/authMiddleware";
-
-// const router = express.Router();
-
-// router.post("/create-order", protectedMiddleware, createOrder);
-
-// export default router;
-
-
 import express from "express";
+import { protectedMiddleware as authMiddleware } from "../middlewares/authMiddleware";
 import { createOrder, verifyPayment } from "../controllers/paymentController";
-import { protectedMiddleware } from "../middlewares/authMiddleware";
-
 const router = express.Router();
 
-router.post("/create-order", protectedMiddleware, createOrder);
-router.post("/verify", protectedMiddleware, verifyPayment);
+// 🔐 PROTECTED ROUTES
+router.post("/create-order", authMiddleware, createOrder);
+router.post("/verify", authMiddleware, verifyPayment);
 
 export default router;

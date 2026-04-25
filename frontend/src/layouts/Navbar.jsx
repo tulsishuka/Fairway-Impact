@@ -31,7 +31,7 @@ const Navbar = () => {
             Home
           </Link>
 
-          <Link to="/charities" className="hover:text-black transition">
+          <Link to="/Charity" className="hover:text-black transition">
             Charities
           </Link>
 

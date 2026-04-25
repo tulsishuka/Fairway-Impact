@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Forgot from './components/Forgot';
 import Subscription from './pages/Subscription';
 import DashBoard from './components/DashBoard';
+import Charity from './components/Charity';
 const App = () => {
   return (
     <>
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/Subscription" element={<Subscription />} />
             <Route path="/Dashboard" element={<DashBoard />} />
+            <Route path="/Charity" element={<Charity />} />
 
       </Routes>
     
