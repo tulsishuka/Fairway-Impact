@@ -22,3 +22,7 @@ const scoreSchema = new mongoose.Schema(
 );
 
 export default mongoose.model("Score", scoreSchema);
+
+
+
+
