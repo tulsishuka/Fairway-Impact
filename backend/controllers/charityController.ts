@@ -21,7 +21,6 @@ export const getCharities = async (req: Request, res: Response) => {
   }
 };
 
-
 export const selectCharity = async (req: AuthRequest, res: Response) => {
   try {
     const userId = req.user?._id;

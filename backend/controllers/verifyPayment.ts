@@ -1,6 +1,3 @@
-
-
-
 import { Request, Response } from "express";
 import crypto from "crypto";
 import Payment from "../models/Payment";
