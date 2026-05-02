@@ -9,3 +9,5 @@ router.post("/add", protectedMiddleware, addScore);
 router.get("/", protectedMiddleware, getScores);
 
 export default router;
+
+

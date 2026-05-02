@@ -7,8 +7,10 @@ import Verify from './components/Verify';
 import Login from './components/Login';
 import Forgot from './components/Forgot';
 import Subscription from './pages/Subscription';
-import DashBoard from './components/DashBoard';
 import Charity from './components/Charity';
+import AdminDashboard from './components/AdminDashboard';
+import DashBoard from './pages/DashBoard';
+
 const App = () => {
   return (
     <>
@@ -23,6 +25,7 @@ const App = () => {
         <Route path="/Subscription" element={<Subscription />} />
             <Route path="/Dashboard" element={<DashBoard />} />
             <Route path="/Charity" element={<Charity />} />
+                        <Route path="/Admin" element={<AdminDashboard />} />
 
       </Routes>
     

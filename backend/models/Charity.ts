@@ -1,15 +1,29 @@
-
 // import mongoose from "mongoose";
 
-// const charitySchema = new mongoose.Schema(
+// const CharitySchema = new mongoose.Schema(
 //   {
-//     name: { type: String, required: true },
-//     description: { type: String, required: true },
+//     name: {
+//       type: String,
+//       required: true,
+//     },
+
+//     description: {
+//       type: String,
+//       required: true,
+//     },
+
+//     percentage: {
+//       type: Number,
+//       default: 0,
+//     },
 //   },
 //   { timestamps: true }
 // );
 
-// export default mongoose.model("Charity", charitySchema);
+// export default mongoose.model("Charity", CharitySchema);
+
+
+
 
 
 

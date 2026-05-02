@@ -1,209 +1,43 @@
 
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
-// import { useNavigate } from "react-router-dom";
-
-// const Charity = () => {
-//   const navigate = useNavigate();
-
-//   const [charities, setCharities] = useState([]);
-//   const [selected, setSelected] = useState(null);
-//   const [percentage, setPercentage] = useState(50);
-//   const [loading, setLoading] = useState(false);
-
-//   // 🔥 FETCH CHARITIES
-//   useEffect(() => {
-//     const fetchCharities = async () => {
-//       try {
-//         const res = await axios.get("http://localhost:3000/api/charity");
-//         setCharities(res.data.data || []);
-//       } catch (err) {
-//         console.log("Error fetching charities:", err);
-//       }
-//     };
-
-//     fetchCharities();
-//   }, []);
-
-//   // 👉 SELECT CHARITY
-//   const handleSelect = (charity) => {
-//     setSelected(charity);
-//   };
-
-//   // ❤️ SAVE CHARITY + PERCENTAGE
-//   const doCharity = async () => {
-//     try {
-//       setLoading(true);
-
-//       const token = localStorage.getItem("token");
-
-//       if (!token) {
-//         alert("Please login first");
-//         navigate("/login");
-//         return;
-//       }
-
-//       if (!selected) {
-//         alert("Please select a charity");
-//         return;
-//       }
-
-//       const res = await axios.post(
-//         "http://localhost:3000/api/charity/select",
-//         {
-//           charityId: selected._id,
-//           percentage: Number(percentage), // ✅ IMPORTANT
-//         },
-//         {
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//           },
-//         }
-//       );
-
-//       alert(res.data.message || "Charity saved successfully ❤️");
-
-//       navigate("/Dashboard");
-
-//     } catch (err) {
-//       console.log(err);
-//       alert(err.response?.data?.message || "Failed to save charity");
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   return (
-//     <div className="min-h-screen bg-gray-100 p-6">
-
-//       <h1 className="text-3xl font-bold text-center mb-8">
-//         Choose Your Charity ❤️
-//       </h1>
-
-//       {/* CHARITY CARDS */}
-//       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-//         {charities.map((c) => (
-//           <div
-//             key={c._id}
-//             onClick={() => handleSelect(c)}
-//             className={`cursor-pointer p-6 rounded-xl shadow-md bg-white border-2 transition ${
-//               selected?._id === c._id
-//                 ? "border-green-500"
-//                 : "border-transparent"
-//             }`}
-//           >
-//             <h2 className="text-xl font-bold">
-//               {c.name}
-//             </h2>
-
-//             <p className="text-gray-600 mt-2">
-//               {c.description}
-//             </p>
-
-//             {selected?._id === c._id && (
-//               <p className="text-green-600 font-semibold mt-3">
-//                 Selected ✔
-//               </p>
-//             )}
-//           </div>
-//         ))}
-
-//       </div>
-
-//       {/* PERCENTAGE SLIDER */}
-//       {selected && (
-//         <div className="mt-10 text-center">
-
-//           <p className="font-semibold mb-2">
-//             Select Donation Percentage: {percentage}%
-//           </p>
-
-//           <input
-//             type="range"
-//             min="0"
-//             max="100"
-//             value={percentage}
-//             onChange={(e) => setPercentage(e.target.value)}
-//             className="w-1/2"
-//           />
-
-//           <div className="flex justify-center gap-10 text-sm text-gray-600 mt-2">
-//             <span>0%</span>
-//             <span>50%</span>
-//             <span>100%</span>
-//           </div>
-
-//         </div>
-//       )}
-
-//       {/* BUTTON */}
-//       {selected && (
-//         <div className="text-center mt-10">
-//           <button
-//             onClick={doCharity}
-//             disabled={loading}
-//             className="px-8 py-3 bg-black text-white rounded-xl hover:bg-gray-800 disabled:opacity-50"
-//           >
-//             {loading ? "Processing..." : "Do Charity ❤️"}
-//           </button>
-//         </div>
-//       )}
-
-//     </div>
-//   );
-// };
-
-// export default Charity;
-
-
-
-
-
-
-
-
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const Charity = () => {
-  const navigate = useNavigate();
-
   const [charities, setCharities] = useState([]);
   const [selected, setSelected] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [saved, setSaved] = useState(false);
+
+  const token = localStorage.getItem("token");
 
   // 🔥 FETCH CHARITIES
   useEffect(() => {
     const fetchCharities = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/charity");
+        const res = await axios.get("http://localhost:5000/api/charity");
+
+        console.log("CHARITIES:", res.data);
+
         setCharities(res.data.data || []);
       } catch (err) {
-        console.log(err);
+        console.log("Fetch error:", err);
       }
     };
 
     fetchCharities();
   }, []);
 
-  // 👉 SELECT CARD
+  // 👉 SELECT CHARITY
   const handleSelect = (charity) => {
     setSelected(charity);
+    setSaved(false);
   };
 
-  // ❤️ SAVE CHARITY
-  const doCharity = async () => {
+  // ❤️ SAVE CHARITY TO USER
+  const saveCharity = async () => {
     try {
-      setLoading(true);
-
-      const token = localStorage.getItem("token");
-
       if (!token) {
         alert("Please login first");
-        navigate("/login");
         return;
       }
 
@@ -212,10 +46,13 @@ const Charity = () => {
         return;
       }
 
+      setLoading(true);
+
       const res = await axios.post(
-        "http://localhost:3000/api/charity/select",
+        "http://localhost:5000/api/charity/select",
         {
           charityId: selected._id,
+          percentage: selected.percentage, // important
         },
         {
           headers: {
@@ -224,11 +61,14 @@ const Charity = () => {
         }
       );
 
-      alert(res.data.message || "Charity selected ❤️");
-      navigate("/dashboard");
+      console.log("SAVE RESPONSE:", res.data);
+
+      setSaved(true);
+      alert(res.data.message || "Charity selected successfully ❤️");
 
     } catch (err) {
-      console.log(err);
+      console.log("Save error:", err);
+      alert("Failed to save charity");
     } finally {
       setLoading(false);
     }
@@ -237,53 +77,64 @@ const Charity = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-6">
 
-      <h1 className="text-3xl font-bold text-center mb-8">
-        Choose Charity ❤️
+      <h1 className="text-2xl font-bold mb-6">
+        Choose Your Charity ❤️
       </h1>
 
-      {/* CHARITY CARDS */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* LIST */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-        {charities.map((c) => (
-          <div
-            key={c._id}
-            onClick={() => handleSelect(c)}
-            className={`cursor-pointer p-6 rounded-xl shadow-md bg-white border-2 transition ${
-              selected?._id === c._id
-                ? "border-green-500"
-                : "border-transparent"
-            }`}
-          >
-            <h2 className="text-xl font-bold">{c.name}</h2>
+        {charities.length > 0 ? (
+          charities.map((c) => (
+            <div
+              key={c._id}
+              onClick={() => handleSelect(c)}
+              className={`p-5 border rounded-lg cursor-pointer transition
+              ${
+                selected?._id === c._id
+                  ? "border-green-500 bg-green-50"
+                  : "border-gray-200 bg-white"
+              }`}
+            >
+              <h2 className="text-xl font-semibold">{c.name}</h2>
 
-            <p className="text-gray-600 mt-2">{c.description}</p>
-
-            {/* 💰 PERCENTAGE DISPLAY */}
-            <p className="text-sm text-gray-500 mt-2">
-              Donation Share: {c.percentage}%
-            </p>
-
-            {selected?._id === c._id && (
-              <p className="text-green-600 font-semibold mt-3">
-                Selected ✔
+              <p className="text-gray-600 mt-2">
+                {c.description}
               </p>
-            )}
-          </div>
-        ))}
+
+              <p className="text-sm text-gray-500 mt-2">
+                Contribution: {c.percentage}%
+              </p>
+
+              {selected?._id === c._id && (
+                <p className="text-green-600 font-bold mt-2">
+                  Selected ✔
+                </p>
+              )}
+            </div>
+          ))
+        ) : (
+          <p>No charities available</p>
+        )}
 
       </div>
 
       {/* BUTTON */}
-      {selected && (
-        <div className="text-center mt-10">
-          <button
-            onClick={doCharity}
-            disabled={loading}
-            className="px-8 py-3 bg-black text-white rounded-xl hover:bg-gray-800"
-          >
-            {loading ? "Processing..." : "Confirm Charity ❤️"}
-          </button>
-        </div>
+      <div className="mt-6">
+        <button
+          onClick={saveCharity}
+          disabled={loading}
+          className="bg-black text-white px-6 py-2 rounded"
+        >
+          {loading ? "Saving..." : "Save Charity"}
+        </button>
+      </div>
+
+      {/* SUCCESS MESSAGE */}
+      {saved && (
+        <p className="mt-4 text-green-600 font-semibold">
+          ❤️ Charity saved successfully
+        </p>
       )}
 
     </div>

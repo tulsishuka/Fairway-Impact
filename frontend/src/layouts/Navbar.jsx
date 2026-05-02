@@ -40,7 +40,9 @@ const Navbar = () => {
           <Link to="/login" className="hover:text-black transition">
             Login
           </Link>
-
+ <Link to="/Admin" className="hover:text-black transition">
+            Admin
+          </Link>
           {/* CTA BUTTON */}
           <Link
             to="/Subscription"

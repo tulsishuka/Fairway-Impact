@@ -2,6 +2,47 @@ import { Request, Response } from "express";
 import Score from "../models/Score";
 
 // ✅ ADD SCORE
+// export const addScore = async (req: any, res: Response) => {
+//   try {
+//     const { value } = req.body;
+//     const userId = req.user._id;
+
+//     // 🔥 Validation
+//     if (!value || value < 1 || value > 45) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Score must be between 1 and 45",
+//       });
+//     }
+
+//     // 🔥 Get all scores (oldest first)
+//     const scores = await Score.find({ userId }).sort({ createdAt: 1 });
+
+//     // 🚨 If already 5 → delete oldest
+//     if (scores.length >= 5) {
+//       await Score.findByIdAndDelete(scores[0]._id);
+//     }
+
+//     // ✅ Add new score
+//     const newScore = await Score.create({
+//       userId,
+//       value,
+//     });
+
+//     res.json({
+//       success: true,
+//       data: newScore,
+//     });
+
+//   } catch (error) {
+//     res.status(500).json({
+//       success: false,
+//       message: "Error adding score",
+//     });
+//   }
+// };
+
+
 export const addScore = async (req: any, res: Response) => {
   try {
     const { value } = req.body;
@@ -12,6 +53,29 @@ export const addScore = async (req: any, res: Response) => {
       return res.status(400).json({
         success: false,
         message: "Score must be between 1 and 45",
+      });
+    }
+
+    // ✅ Normalize today's date
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+
+    // ❌ Check duplicate date
+    const existingScore = await Score.findOne({
+      userId,
+      date: {
+        $gte: today,
+        $lt: tomorrow,
+      },
+    });
+
+    if (existingScore) {
+      return res.status(400).json({
+        success: false,
+        message: "You can only add one score per day",
       });
     }
 
@@ -27,6 +91,7 @@ export const addScore = async (req: any, res: Response) => {
     const newScore = await Score.create({
       userId,
       value,
+      date: new Date(),
     });
 
     res.json({
@@ -61,3 +126,10 @@ export const getScores = async (req: any, res: Response) => {
     });
   }
 };
+
+
+
+
+
+
+

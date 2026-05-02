@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import Charity from "../models/Charity";
 import { AuthRequest } from "../interfaces/authRequest.interface";
 import { User } from "../models/userModel";
+import Charity from "../models/Charity";
 
 
 
@@ -60,3 +60,9 @@ export const selectCharity = async (req: AuthRequest, res: Response) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+
+
+
+
+

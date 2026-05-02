@@ -1,44 +1,31 @@
-
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3000/api";
+const API = axios.create({
+  baseURL: "http://localhost:5000",
+});
 
-// 🔐 Helper to get token
-const getAuthHeader = () => {
+// 🔐 TOKEN AUTO ATTACH
+API.interceptors.request.use((req) => {
   const token = localStorage.getItem("token");
 
-  return {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-};
+  if (token) {
+    req.headers.Authorization = `Bearer ${token}`;
+  }
 
+  return req;
+});
 
-// ✅ CREATE ORDER (PAYMENT)
-export const createOrder = async (payload) => {
-  return axios.post(
-    `${BASE_URL}/payment/create-order`,
-    payload,
-    getAuthHeader()
-  );
-};
+// 📊 Dashboard
+export const getDashboardData = () =>
+  API.get("/api/user/dashboard");
 
+// 💳 Payments
+export const createOrder = (data) =>
+  API.post("/api/payment/create-order", data);
 
-// ✅ VERIFY PAYMENT
-export const verifyPayment = async (payload) => {
-  return axios.post(
-    `${BASE_URL}/payment/verify`,
-    payload,
-    getAuthHeader()
-  );
-};
+export const verifyPayment = (data) =>
+  API.post("/api/payment/verify", data);
 
-
-// ✅ DASHBOARD DATA
-export const getDashboardData = async () => {
-  return axios.get(
-    `${BASE_URL}/user/dashboard`,
-    getAuthHeader()
-  );
-};
+// 🏌️ Scores
+export const getScores = () =>
+  API.get("/api/score");
