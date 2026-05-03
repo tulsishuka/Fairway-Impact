@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { getDashboardData } from "../services/api";
 import Score from "../components/Score";
@@ -6,7 +5,7 @@ import Score from "../components/Score";
 const DashBoard = () => {
   const [data, setData] = useState(null);
 
-  // 🔥 FETCH DASHBOARD
+  // FETCH DASHBOARD
   const fetchDashboard = async () => {
     try {
       const res = await getDashboardData();
@@ -28,7 +27,6 @@ const DashBoard = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-10">
-
       <h1 className="text-3xl font-bold mb-8">Dashboard</h1>
 
       <div className="grid grid-cols-2 gap-6">
@@ -76,7 +74,8 @@ const DashBoard = () => {
         </div>
 
       </div>
-      <Score/>
+
+      <Score />
     </div>
   );
 };

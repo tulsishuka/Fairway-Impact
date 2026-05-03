@@ -37,6 +37,7 @@ export const verify = asyncHandler(async (req: Request, res: Response) => {
 });
 
 
+
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
@@ -47,9 +48,18 @@ export const login = async (req: Request, res: Response) => {
   res.json({
     success: true,
     token,
-    subscriptionStatus: user.subscriptionStatus, // 🔥 IMPORTANT
+    subscriptionStatus: user.subscriptionStatus,
+
+    // 🔥 ADD THIS (CRITICAL FIX)
+    user: {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role
+    }
   });
 };
+
 /**
  * @desc Reset password using old password
  */

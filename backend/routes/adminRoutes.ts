@@ -10,6 +10,7 @@ import {
   getResults,
   approveWinner,
   rejectWinner,
+  deleteUser,
 } from "../controllers/adminController";
 
 import { protectedMiddleware } from "../middlewares/authMiddleware";
@@ -35,4 +36,10 @@ router.get("/results", protectedMiddleware, adminMiddleware, getResults);
 router.post("/approve/:id", protectedMiddleware, adminMiddleware, approveWinner);
 router.post("/reject/:id", protectedMiddleware, adminMiddleware, rejectWinner);
 
+router.delete(
+  "/user/:id",
+  protectedMiddleware,
+  adminMiddleware,
+  deleteUser
+);
 export default router;
