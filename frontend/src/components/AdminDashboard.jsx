@@ -39,7 +39,7 @@ const AdminDashboard = () => {
 
   const runDraw = async () => {
     await axios.post(
-      "http://localhost:3000/api/draw/run",
+      "http://localhost:5000/api/draw/run",
       {},
       { headers: { Authorization: `Bearer ${token}` } }
     );
