@@ -8,6 +8,7 @@ import Result from "../models/Result";
 import PrizePool from "../models/PrizePool";
 import Charity from "../models/Charity"; // ✅ FIXED
 import CharityDonation from "../models/CharityDonation";
+import Score from "../models/Score";
 
 
 /**
@@ -66,16 +67,7 @@ export const getAnalytics = async (req: Request, res: Response) => {
  * 👥 GET USERS
  */
 export const getUsers = async (req: Request, res: Response) => {
-  // try {
-  //   const users = await User.find().select("-password");
-
-  //   res.json({
-  //     success: true,
-  //     data: users,
-  //   });
-  // } catch (error) {
-  //   res.status(500).json({ message: "Error fetching users" });
-  // }
+ 
 
    const users = await User.find()
     .populate("selectedCharity", "name percentage description")
@@ -269,3 +261,63 @@ export const deleteUser = async (req: Request, res: Response) => {
     });
   }
 };
+
+
+// 👇 GET ALL USERS WITH SCORES
+export const getUsersWithScores = async (req: Request, res: Response) => {
+  try {
+    const users = await User.find()
+      .select("-password")
+      .lean();
+
+    const scores = await Score.find().lean();
+
+    // attach scores to users
+    const usersWithScores = users.map((u) => {
+      const userScores = scores.filter(
+        (s) => s.userId.toString() === u._id.toString()
+      );
+
+      return {
+        ...u,
+        scores: userScores,
+        totalScores: userScores.length,
+        latestScore: userScores[userScores.length - 1]?.value || null,
+      };
+    });
+
+    res.json({
+      success: true,
+      data: usersWithScores,
+    });
+
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Error fetching users with scores",
+    });
+  }
+};
+
+
+
+
+
+
+;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

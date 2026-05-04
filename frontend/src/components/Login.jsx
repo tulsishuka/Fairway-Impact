@@ -39,9 +39,9 @@ const Login = () => {
 
     // 🔥 ROLE BASED REDIRECT (FIRST PRIORITY)
     if (user?.role === "admin") {
-      navigate("/AdminDashboard");
-      return;
-    }
+  navigate("/admin");
+  return;
+}
 
     // 👇 normal user flow
     if (subscriptionStatus === "active") {
@@ -56,36 +56,7 @@ const Login = () => {
 };
 
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const res = await axios.post(
-  //       "http://127.0.0.1:5000/api/v1/auth/login",
-  //       formData
-  //     );
-
-  //     console.log("LOGIN RESPONSE:", res.data); // 🔥 DEBUG
-
-  //     const { token, subscriptionStatus } = res.data;
-
-  //     // ✅ Save token
-  //     localStorage.setItem("token", token);
-
-  //     alert("Login successful");
-
-  //     // ✅ Correct redirect
-  //     if (subscriptionStatus === "active") {
-  //       navigate("/Dashboard"); // ✅ lowercase
-  //     } else {
-  //       navigate("/Subscription"); // ✅ lowercase
-  //     }
-
-  //   } catch (error) {
-  //     alert(error.response?.data?.message || "Login failed");
-  //   }
-  // };
-
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-white">
       <div className="w-full max-w-md p-8 shadow-md rounded">

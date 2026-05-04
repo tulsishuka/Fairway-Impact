@@ -1,72 +1,49 @@
-import { Search, ShoppingCart } from "lucide-react";
+
+import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="w-full border-b border-gray-200 bg-white/80 backdrop-blur-md px-4 py-4 md:px-10 sticky top-0 z-50">
-      
+    <nav className="w-full bg-[#0a0e54] px-4 py-3 md:px-10 sticky top-0 z-50 shadow-lg">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
-
+        
         {/* LOGO */}
-        <Link to="/">
-          <div className="text-2xl font-bold text-slate-900">
-            Digital Heroes
+        <Link to="/" className="flex items-center gap-2">
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-[#0a0e54] font-black text-xl italic">
+            D
+          </div>
+          <div className="text-xl font-bold text-white tracking-tight">
+            igital Heroes
           </div>
         </Link>
 
-        {/* SEARCH (Desktop only) */}
-        <div className="relative hidden flex-1 max-w-md md:block">
-          <input
-            type="text"
-            placeholder="Search charities, draws..."
-            className="w-full rounded-xl border border-gray-200 py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-black/10"
-          />
-          <Search className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
-        </div>
-
-        {/* LINKS */}
-        <div className="flex items-center space-x-6 text-sm font-medium text-gray-700">
-
-          <Link to="/" className="hover:text-black transition">
-            Home
-          </Link>
-
-          <Link to="/Charity" className="hover:text-black transition">
-            Charities
-          </Link>
-
        
 
-          <Link to="/login" className="hover:text-black transition">
+        {/* AUTH BUTTONS */}
+        <div className="flex items-center space-x-3">
+          <Link 
+            to="/login" 
+            className="px-5 py-2 text-sm font-bold text-white border border-blue-800 rounded-md hover:bg-blue-900/50 transition"
+          >
             Login
           </Link>
- <Link to="/Admin" className="hover:text-black transition">
-            Admin
-          </Link>
-          {/* CTA BUTTON */}
-          <Link
-            to="/Subscription"
-            className="px-4 py-2 bg-black text-white rounded-xl hover:bg-gray-800 transition"
+          <Link 
+            to="/Charity" 
+            className="px-5 py-2 text-sm font-bold text-white bg-[#1a45c4] rounded-md hover:bg-blue-600 transition shadow-md"
           >
-            Subscribe
+            Charity
           </Link>
-
-          {/* CART / ICON (optional future feature) */}
-          <Link to="/cart" className="hidden md:block">
-            <ShoppingCart className="h-5 w-5 hover:text-black transition" />
-          </Link>
-
         </div>
       </div>
 
-      {/* MOBILE SEARCH */}
-      <div className="mt-4 relative md:hidden">
+      {/* MOBILE SEARCH - Updated to match dark theme */}
+      <div className="mt-3 relative md:hidden">
         <input
           type="text"
           placeholder="Search charities..."
-          className="w-full rounded-xl border border-gray-200 py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-black/10"
+          className="w-full rounded-lg bg-[#161b6e] border border-blue-900 py-2 pl-4 pr-10 text-white placeholder-blue-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
-        <Search className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+        <Search className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-blue-300" />
       </div>
 
     </nav>

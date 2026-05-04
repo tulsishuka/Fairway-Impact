@@ -2,6 +2,9 @@ import { Request, Response } from "express";
 import Draw from "../models/Draw";
 import Result from "../models/Result";
 import Score from "../models/Score";
+import { Document, DefaultSchemaOptions, Types } from "mongoose";
+
+
 
 // 🎲 Generate 5 random numbers (1–45)
 const generateNumbers = (): number[] => {
@@ -38,7 +41,75 @@ export const createDraw = async (req: Request, res: Response) => {
   }
 };
 
-// 🏆 RUN DRAW
+// export const runDraw = async (req: Request, res: Response) => {
+//   try {
+//     const numbers = generateNumbers();
+
+//     const draw = await Draw.create({
+//       numbers,
+//       isPublished: true,
+//     });
+
+//     // 🔥 GET ALL SCORES
+//     const allScores = await Score.find();
+
+//     // 🔥 GROUP BY USER
+//     const userMap: any = {};
+
+//     allScores.forEach((s: any) => {
+//       if (!userMap[s.userId]) {
+//         userMap[s.userId] = [];
+//       }
+//       userMap[s.userId].push(s.value);
+//     });
+
+//     // 🔥 LOOP USERS
+//     for (let userId in userMap) {
+//       const userNumbers = userMap[userId];
+
+//       const matches = userNumbers.filter((num: number) =>
+//         numbers.includes(num)
+//       ).length;
+
+//       let rewardType = "none";
+//       let winnings = 0;
+
+//       if (matches === 5) {
+//         rewardType = "jackpot";
+//         winnings = 10000;
+//       } else if (matches === 4) {
+//         rewardType = "medium";
+//         winnings = 2000;
+//       } else if (matches === 3) {
+//         rewardType = "small";
+//         winnings = 500;
+//       }
+
+//       await Result.create({
+//         userId,
+//         drawId: draw._id,
+//         matchedNumbers: matches,
+//         rewardType,
+//         winnings,
+//       });
+//     }
+
+//     res.json({
+//       success: true,
+//       message: "Draw executed successfully",
+//       draw,
+//     });
+
+//   } catch (error: any) {
+//     console.error(error);
+//     res.status(500).json({ error: error.message });
+//   }
+// };
+
+
+
+
+
 export const runDraw = async (req: Request, res: Response) => {
   try {
     const numbers = generateNumbers();
@@ -48,12 +119,12 @@ export const runDraw = async (req: Request, res: Response) => {
       isPublished: true,
     });
 
-    // 🔥 GET ALL SCORES
     const allScores = await Score.find();
 
-    // 🔥 GROUP BY USER
     const userMap: any = {};
+    const results: any[] = []; // ✅ STORE RESULTS
 
+    // GROUP USERS
     allScores.forEach((s: any) => {
       if (!userMap[s.userId]) {
         userMap[s.userId] = [];
@@ -61,7 +132,7 @@ export const runDraw = async (req: Request, res: Response) => {
       userMap[s.userId].push(s.value);
     });
 
-    // 🔥 LOOP USERS
+    // LOOP USERS
     for (let userId in userMap) {
       const userNumbers = userMap[userId];
 
@@ -83,19 +154,26 @@ export const runDraw = async (req: Request, res: Response) => {
         winnings = 500;
       }
 
-      await Result.create({
+      const result = await Result.create({
         userId,
         drawId: draw._id,
         matchedNumbers: matches,
         rewardType,
         winnings,
       });
+
+      results.push(result); // ✅ ADD TO ARRAY
     }
 
-    res.json({
+    // ✅ OPTIONAL (BEST): populate user details
+    const populatedResults = await Result.find({ drawId: draw._id })
+      .populate("userId", "name email");
+
+    return res.json({
       success: true,
       message: "Draw executed successfully",
       draw,
+      results: populatedResults, // ✅ RETURN RESULTS
     });
 
   } catch (error: any) {
@@ -103,4 +181,3 @@ export const runDraw = async (req: Request, res: Response) => {
     res.status(500).json({ error: error.message });
   }
 };
-

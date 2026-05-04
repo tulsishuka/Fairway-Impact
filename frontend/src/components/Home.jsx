@@ -1,85 +1,74 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-slate-100">
+    <div className="min-h-screen bg-[#050B3E] relative overflow-hidden text-white">
 
-      
+      {/* MAIN */}
+      <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center max-w-7xl mx-auto px-6 py-24 md:py-32">
+        
+        {/* LEFT */}
+        <section className="flex flex-col items-start gap-6">
 
-      {/* HERO SECTION */}
-      <section className="text-center px-6 py-24">
-        <h2 className="text-4xl md:text-6xl font-bold text-slate-900 leading-tight">
-          Play. Compete. Give Back.
-        </h2>
+          <h2 className="text-lg md:text-xl text-blue-300">
+            🎯 Play • Win • Give Back
+          </h2>
 
-        <p className="mt-6 text-lg text-slate-600 max-w-2xl mx-auto">
-          Track your performance, enter monthly draws, and support real-world
-          causes — all in one modern subscription platform.
-        </p>
+          <h1 className="text-5xl md:text-7xl font-extrabold leading-tight">
+            Win Rewards While Supporting
+            <span className="text-green-400"> Real Causes ❤️</span>
+          </h1>
 
-        <div className="mt-10 flex justify-center gap-4">
-          <button className="px-6 py-3 bg-black text-white rounded-xl text-sm hover:scale-105 transition">
-            Get Started
-          </button>
-
-          <button className="px-6 py-3 border border-slate-300 rounded-xl text-sm hover:bg-slate-100 transition">
-            Explore Charities
-          </button>
-        </div>
-      </section>
-
-      {/* FEATURES SECTION */}
-      <section className="grid md:grid-cols-3 gap-6 px-6 max-w-6xl mx-auto pb-20">
-
-        <div className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
-          <h3 className="text-lg font-semibold text-slate-800">
-            📊 Track Performance
-          </h3>
-          <p className="text-slate-600 mt-2 text-sm">
-            Add your latest 5 golf scores and monitor your progress.
+          <p className="text-lg md:text-xl text-white/80 max-w-lg">
+            Submit your numbers, join monthly draws, and win exciting prizes — 
+            while contributing to meaningful charities.
           </p>
-        </div>
 
-        <div className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
-          <h3 className="text-lg font-semibold text-slate-800">
-            🎲 Monthly Draws
-          </h3>
-          <p className="text-slate-600 mt-2 text-sm">
-            Participate in fair, automated reward-based monthly draws.
-          </p>
-        </div>
+          {/* CTA */}
+          <div className="flex gap-4 mt-4">
+            <button
+              onClick={() => navigate("/signup")}
+              className="px-8 py-3 bg-green-500 text-black rounded-xl font-semibold hover:bg-green-400 transition"
+            >
+              Get Started
+            </button>
 
-        <div className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
-          <h3 className="text-lg font-semibold text-slate-800">
-            ❤️ Real Impact
-          </h3>
-          <p className="text-slate-600 mt-2 text-sm">
-            A portion of your subscription supports meaningful charities.
-          </p>
-        </div>
+            <button
+              onClick={() => navigate("/login")}
+              className="px-8 py-3 border border-white rounded-xl hover:bg-white hover:text-black transition"
+            >
+              Login
+            </button>
+          </div>
+        </section>
 
-      </section>
+        {/* RIGHT */}
+        <section className="flex justify-center items-center">
 
-      {/* IMPACT SECTION */}
-      <section className="bg-black text-white py-20 px-6 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold">
-          Your Game. Their Future.
-        </h2>
+          {/* DRAW NUMBERS UI */}
+          <div className="flex gap-4 text-xl font-bold">
 
-        <p className="mt-4 text-slate-300 max-w-2xl mx-auto">
-          Every subscription contributes to education, health, and environmental causes.
-          You don’t just play — you create impact.
-        </p>
+            {[12, 25, 7, 33, 41].map((num, i) => (
+              <div
+                key={i}
+                className="w-16 h-16 flex items-center justify-center bg-green-500 text-black rounded-full shadow-xl text-2xl animate-bounce"
+                style={{ animationDelay: `${i * 0.2}s` }}
+              >
+                {num}
+              </div>
+            ))}
 
-        <button className="mt-8 px-6 py-3 bg-white text-black rounded-xl hover:scale-105 transition">
-          Join Now
-        </button>
-      </section>
+          </div>
 
-      {/* FOOTER */}
-      <footer className="px-6 py-10 text-center text-sm text-slate-500">
-        © {new Date().getFullYear()} Digital Heroes. All rights reserved.
-      </footer>
+        </section>
+      </div>
+
+      {/* OPTIONAL GLOW EFFECT */}
+      <div className="absolute w-[400px] h-[400px] bg-green-500 opacity-20 blur-3xl rounded-full top-[-100px] right-[-100px]" />
+      <div className="absolute w-[300px] h-[300px] bg-blue-500 opacity-20 blur-3xl rounded-full bottom-[-100px] left-[-100px]" />
 
     </div>
   );

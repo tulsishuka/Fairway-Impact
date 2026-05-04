@@ -53,6 +53,7 @@ const DashBoard = () => {
         <div className="bg-white p-6 rounded-xl shadow">
           <h2 className="font-semibold text-lg">Selected Charity ❤️</h2>
           <p className="mt-2">{data.charity}</p>
+         
         </div>
 
         {/* Contribution */}

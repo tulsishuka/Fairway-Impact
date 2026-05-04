@@ -11,6 +11,7 @@ import {
   approveWinner,
   rejectWinner,
   deleteUser,
+  getUsersWithScores,
 } from "../controllers/adminController";
 
 import { protectedMiddleware } from "../middlewares/authMiddleware";
@@ -41,5 +42,16 @@ router.delete(
   protectedMiddleware,
   adminMiddleware,
   deleteUser
+);
+router.get(
+  "/users-scores",
+  protectedMiddleware,
+  adminMiddleware,
+);
+router.get(
+  "/users-with-scores",
+  protectedMiddleware,
+  adminMiddleware,
+  getUsersWithScores
 );
 export default router;
