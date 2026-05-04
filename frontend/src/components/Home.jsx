@@ -1,10 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import About from "../pages/About";
+import Charity from "../pages/Charity";
 
 const Home = () => {
   const navigate = useNavigate();
 
   return (
+    <>
     <div className="min-h-screen bg-[#050B3E] relative overflow-hidden text-white">
 
       {/* MAIN */}
@@ -13,11 +16,9 @@ const Home = () => {
         {/* LEFT */}
         <section className="flex flex-col items-start gap-6">
 
-          <h2 className="text-lg md:text-xl text-blue-300">
-            🎯 Play • Win • Give Back
-          </h2>
+         
 
-          <h1 className="text-5xl md:text-7xl font-extrabold leading-tight">
+          <h1 className="text-5xl md:text-4xl font-extrabold leading-tight">
             Win Rewards While Supporting
             <span className="text-green-400"> Real Causes ❤️</span>
           </h1>
@@ -36,12 +37,7 @@ const Home = () => {
               Get Started
             </button>
 
-            <button
-              onClick={() => navigate("/login")}
-              className="px-8 py-3 border border-white rounded-xl hover:bg-white hover:text-black transition"
-            >
-              Login
-            </button>
+           
           </div>
         </section>
 
@@ -71,6 +67,9 @@ const Home = () => {
       <div className="absolute w-[300px] h-[300px] bg-blue-500 opacity-20 blur-3xl rounded-full bottom-[-100px] left-[-100px]" />
 
     </div>
+    <About/>
+    <Charity/>
+    </>
   );
 };
 
