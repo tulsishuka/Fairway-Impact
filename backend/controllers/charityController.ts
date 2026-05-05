@@ -2,8 +2,8 @@
 
 import { Response } from "express";
 import { AuthRequest } from "../interfaces/authRequest.interface";
-import { User } from "../models/userModel.js";
-import Charity from "../models/Charity.js";
+import { User } from "../models/userModel";
+import Charity from "../models/Charity";
 
 
 export const selectCharity = async (req: AuthRequest, res: Response) => {

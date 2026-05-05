@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import crypto from "crypto";
 import razorpay from "../utils/razorpay";
-import Payment from "../models/Payment.js";
-import { User } from "../models/userModel.js";
-import PrizePool from "../models/PrizePool.js";
-import CharityDonation from "../models/CharityDonation.js";
+import Payment from "../models/Payment";
+import { User } from "../models/userModel";
+import PrizePool from "../models/PrizePool";
+import CharityDonation from "../models/CharityDonation";
 
 
 export const createOrder = async (req: any, res: any) => {

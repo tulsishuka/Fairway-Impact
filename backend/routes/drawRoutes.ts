@@ -1,5 +1,5 @@
 import express from "express";
-import { runDraw, createDraw } from "../controllers/drawController.js";
+import { runDraw, createDraw } from "../controllers/drawController";
 import { protectedMiddleware } from "../middlewares/authMiddleware";
 import { adminMiddleware } from "../middlewares/adminMiddleware";
 

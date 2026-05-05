@@ -2,13 +2,13 @@
 
 
 import { Request, Response } from "express";
-import { User } from "../models/userModel.js";
-import Payment from "../models/Payment.js";
-import Result from "../models/Result.js";
-import PrizePool from "../models/PrizePool.js";
-import Charity from "../models/Charity.js"; // ✅ FIXED
-import CharityDonation from "../models/CharityDonation.js";
-import Score from "../models/Score.js";
+import { User } from "../models/userModel";
+import Payment from "../models/Payment";
+import Result from "../models/Result";
+import PrizePool from "../models/PrizePool";
+import Charity from "../models/Charity"; // ✅ FIXED
+import CharityDonation from "../models/CharityDonation";
+import Score from "../models/Score";
 
 
 export const getAnalytics = async (req: Request, res: Response) => {

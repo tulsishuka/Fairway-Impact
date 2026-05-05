@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import Draw from "../models/Draw.js";
-import Result from "../models/Result.js";
-import Score from "../models/Score.js";
+import Draw from "../models/Draw";
+import Result from "../models/Result";
+import Score from "../models/Score";
 import { Document, DefaultSchemaOptions, Types } from "mongoose";
 
 

@@ -1,7 +1,7 @@
 import express from "express";
-import {  selectCharity } from "../controllers/charityController.js";
+import {  selectCharity } from "../controllers/charityController";
 import { protectedMiddleware } from "../middlewares/authMiddleware";
-import { getCharities } from "../controllers/adminController.js";
+import { getCharities } from "../controllers/adminController";
 
 const router = express.Router();
 

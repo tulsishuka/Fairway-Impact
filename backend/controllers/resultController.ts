@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import Results from "../models/Results.js";
-import Result from "../models/Result.js";
+import Results from "../models/Results";
+import Result from "../models/Result";
 
 
 export const getAllResults = async (req: Request, res: Response) => {

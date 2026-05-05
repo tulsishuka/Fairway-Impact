@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Score from "../models/Score.js";
+import Score from "../models/Score";
 
 
 export const addScore = async (req: any, res: Response) => {
