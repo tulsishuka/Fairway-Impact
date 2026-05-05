@@ -13,7 +13,7 @@ const AdminWinners = () => {
 
   const fetchResults = async () => {
     const res = await axios.get(
-      "http://localhost:5000/api/admin/results",
+      "https://givehope-platform-4.onrender.com/api/admin/results",
       {
         headers: { Authorization: `Bearer ${token}` },
       }

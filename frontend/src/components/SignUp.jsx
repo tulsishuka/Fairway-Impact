@@ -27,7 +27,7 @@ const SignUp = () => {
 
     try {
       const res = await axios.post(
-        "http://127.0.0.1:5000/api/v1/auth/register",
+        "https://givehope-platform-4.onrender.com/api/v1/auth/register",
         formData
       );
       toast.success("Account created successfully ❤️");

@@ -28,7 +28,7 @@ const Score = () => {
         return;
       }
 
-      await fetch("http://localhost:5000/api/score/add", {
+      await fetch("https://givehope-platform-4.onrender.com/api/score/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

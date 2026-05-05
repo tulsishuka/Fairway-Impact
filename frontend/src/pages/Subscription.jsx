@@ -50,7 +50,7 @@ const Subscription = () => {
         handler: async function (response) {
           try {
             const verifyRes = await fetch(
-              "http://localhost:5000/api/payment/verify",
+              "https://givehope-platform-4.onrender.com/api/payment/verify",
               {
                 method: "POST",
                 headers: {

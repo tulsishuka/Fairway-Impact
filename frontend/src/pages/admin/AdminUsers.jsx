@@ -11,7 +11,7 @@ const AdminUsers = () => {
   const fetchUsers = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/admin/users",
+        "https://givehope-platform-4.onrender.com/api/admin/users",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -32,7 +32,7 @@ const AdminUsers = () => {
   const deleteUser = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:5000/api/admin/user/${id}`,
+        `https://givehope-platform-4.onrender.com/api/admin/user/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ const AdminUsers = () => {
   const updateStatus = async (id, status) => {
     try {
       await axios.post(
-        "http://localhost:5000/api/admin/user/update",
+        "https://givehope-platform-4.onrender.com/api/admin/user/update",
         { userId: id, status },
         {
           headers: {

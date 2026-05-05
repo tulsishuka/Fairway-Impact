@@ -22,12 +22,13 @@ const Charity = () => {
   useEffect(() => {
     const fetchCharities = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/charity");
+        const res = await axios.get("https://givehope-platform-4.onrender.com/api/charity");
         setCharities(res.data.data || []);
       } catch (err) {
         console.log("Fetch error:", err);
       }
     };
+
     fetchCharities();
   }, []);
 
@@ -44,7 +45,7 @@ const Charity = () => {
 
       setLoading(true);
       await axios.post(
-        "http://localhost:5000/api/charity/select",
+        "https://givehope-platform-4.onrender.com/api/charity/select",
         { charityId: selected._id, percentage: selected.percentage || 0 },
         { headers: { Authorization: `Bearer ${token}` } }
       );

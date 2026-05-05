@@ -12,7 +12,7 @@ const AdminScores = () => {
 
   const fetchScores = async () => {
     const res = await axios.get(
-      "http://localhost:5000/api/admin/users-with-scores",
+      "https://givehope-platform-4.onrender.com/api/admin/users-with-scores",
       {
         headers: { Authorization: `Bearer ${token}` },
       }
