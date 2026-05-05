@@ -2,7 +2,7 @@
 import dotenv from "dotenv";
 dotenv.config(); 
 
-import { connectDB } from "./config/database.config";
+import { connectDB } from "./config/database.config.js";
 import app from "./app";
 
 const startServer = async () => {
