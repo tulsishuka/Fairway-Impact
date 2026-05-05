@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import { AppError } from "../utils/AppError";
-import { User } from "../models/userModel";
+import { User } from "../models/userModel.js";
 import { PendingUser } from "../models/PendingUser";
 
 

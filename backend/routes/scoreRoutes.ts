@@ -1,6 +1,6 @@
 import express from "express";
 import { protectedMiddleware } from "../middlewares/authMiddleware";
-import { addScore, getScores } from "../controllers/scoreController";
+import { addScore, getScores } from "../controllers/scoreController.js";
 
 const router = express.Router();
 

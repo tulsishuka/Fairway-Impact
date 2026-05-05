@@ -1,10 +1,10 @@
 
 import { Response, Request } from "express";
-import { User } from "../models/userModel";
-import Score from "../models/Score";
-import Payment from "../models/Payment";
-import Result from "../models/Result";
-import Draw from "../models/Draw";
+import { User } from "../models/userModel.js";
+import Score from "../models/Score.js";
+import Payment from "../models/Payment.js";
+import Result from "../models/Result.js";
+import Draw from "../models/Draw.js";
 
 interface AuthRequest extends Request {
   user?: any;

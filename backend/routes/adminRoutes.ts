@@ -12,7 +12,7 @@ import {
   rejectWinner,
   deleteUser,
   getUsersWithScores,
-} from "../controllers/adminController";
+} from "../controllers/adminController.js";
 
 import { protectedMiddleware } from "../middlewares/authMiddleware";
 import { adminMiddleware } from "../middlewares/adminMiddleware";

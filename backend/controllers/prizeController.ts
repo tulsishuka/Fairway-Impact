@@ -1,5 +1,5 @@
-import PrizePool from "../models/PrizePool";
-import Result from "../models/Result";
+import PrizePool from "../models/PrizePool.js";
+import Result from "../models/Result.js";
 
 export const distributeRewards = async (req: any, res: any) => {
   try {

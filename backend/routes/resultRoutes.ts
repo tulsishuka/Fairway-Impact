@@ -3,7 +3,7 @@ import {
   getAllResults,
   verifyWinner,
   rejectWinner,
-} from "../controllers/resultController";
+} from "../controllers/resultController.js";
 
 import { protectedMiddleware } from "../middlewares/authMiddleware";
 import { adminMiddleware } from "../middlewares/adminMiddleware";

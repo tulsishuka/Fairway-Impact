@@ -1,5 +1,5 @@
 import express from "express";
-import { distributeRewards } from "../controllers/prizeController";
+import { distributeRewards } from "../controllers/prizeController.js";
 import { protectedMiddleware } from "../middlewares/authMiddleware";
 import { adminMiddleware } from "../middlewares/adminMiddleware";
 

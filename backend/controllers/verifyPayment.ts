@@ -1,9 +1,9 @@
 
 import crypto from "crypto";
-import Payment from "../models/Payment";
-import { User } from "../models/userModel";
-import PrizePool from "../models/PrizePool";
-import CharityDonation from "../models/CharityDonation";
+import Payment from "../models/Payment.js";
+import { User } from "../models/userModel.js";
+import PrizePool from "../models/PrizePool.js";
+import CharityDonation from "../models/CharityDonation.js";
 
 export const verifyPayment = async (req: any, res: any) => {
   try {
