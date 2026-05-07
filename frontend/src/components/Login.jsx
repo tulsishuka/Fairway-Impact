@@ -6,6 +6,8 @@ import { useNavigate, Link } from "react-router-dom";
 const Login = () => {
   const navigate = useNavigate();
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -17,6 +19,7 @@ const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -74,15 +77,26 @@ const Login = () => {
 
           <div>
             <label className="text-sm text-gray-300">Password</label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Enter your password"
-              value={formData.password}
-              onChange={handleChange}
-              className="w-full mt-2 px-4 py-3 rounded-xl bg-white/10 border border-white/20 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400"
-              required
-            />
+
+            <div className="relative mt-2">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="Enter your password"
+                value={formData.password}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400"
+                required
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-green-300"
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
           </div>
 
           <button
