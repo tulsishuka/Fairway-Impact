@@ -6,7 +6,7 @@ import { User } from "../models/userModel";
 import Payment from "../models/Payment";
 import Result from "../models/Result";
 import PrizePool from "../models/PrizePool";
-import Charity from "../models/Charity"; // ✅ FIXED
+import Charity from "../models/Charity"; 
 import CharityDonation from "../models/CharityDonation";
 import Score from "../models/Score";
 
