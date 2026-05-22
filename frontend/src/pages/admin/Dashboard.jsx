@@ -27,7 +27,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 px-4 sm:px-6 lg:px-10 py-8">
+    <div className="min-h-screen  px-4 sm:px-6 lg:px-10 py-8 bg-gradient-to-br from-gray-100 to-gray-200">
       <div className="mb-10">
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-800">
           📊 Admin Dashboard
