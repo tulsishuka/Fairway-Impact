@@ -143,7 +143,7 @@ const UserScore = () => {
                 className="w-12 h-12 rounded-full object-cover border border-[#2BB673]"
               />
               <div>
-                <h3 className="font-bold text-gray-100">Alex Thompson</h3>
+                <h3 className="font-bold text-gray-100">Welcome</h3>
                 <span className="text-[10px] font-bold bg-[#1A221E] text-[#2BB673] px-2 py-0.5 rounded-full tracking-wider uppercase">Pro Member</span>
               </div>
             </div>

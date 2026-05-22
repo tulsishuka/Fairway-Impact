@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { getDashboardData } from "../services/api";
 import { Link } from "react-router-dom";
-import DashboardLayout from "../layouts/DashboardLayout";
 const DashBoard = () => {
   const [data, setData] = useState(null);
 

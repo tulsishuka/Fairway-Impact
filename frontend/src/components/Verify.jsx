@@ -20,7 +20,6 @@ const Verify = () => {
       toast.error("Please enter OTP");
       return;
     }
-
     try {
       setLoading(true);
 
@@ -43,13 +42,13 @@ const Verify = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#050B3E]  px-4">
+    <div className="min-h-screen flex items-center justify-center bg-[#090F0C] px-4">
 
       {/* CARD */}
       <div className="w-full max-w-md  border border-white/20 shadow-2xl rounded-3xl p-8 text-green-500">
 
         {/* TITLE */}
-        <h2 className="text-3xl font-bold text-center">
+        <h2 className="text-3xl font-bold text-center text-[#C9FCE1]">
           Verify Your Account
         </h2>
 
@@ -69,7 +68,7 @@ const Verify = () => {
               maxLength={6}
               placeholder="Enter 6-digit OTP"
               onChange={(e) => setOtp(e.target.value)}
-              className="w-full mt-2 px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-center tracking-widest text-lg outline-none focus:ring-2 focus:ring-green-400 placeholder-gray-300"
+              className="w-full mt-2 px-4 py-3 rounded-xl  border border-white/20 text-center tracking-widest text-lg outline-none focus:ring-2 focus:ring-green-400 placeholder-gray-300"
             />
           </div>
           <button
