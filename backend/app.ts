@@ -14,17 +14,6 @@ import adminRoutes from "./routes/adminRoutes";
 const app = express();
 
 app.use(express.json());
-// app.use(cors());
-// app.use(
-//   cors({
-//     origin: [
-//       "https://givehope-platform-5.onrender.com"
-//     ],
-//     credentials: true,
-//   })
-// );
-
-
 const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:5173",

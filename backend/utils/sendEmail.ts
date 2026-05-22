@@ -1,25 +1,38 @@
 
+
 // import nodemailer from "nodemailer";
 
-// export const sendEmail = async (to: string, subject: string, text: string) => {
+// export const sendEmail = async (
+//   to: string,
+//   subject: string,
+//   text: string
+// ) => {
+//   try {
+//     console.log("EMAIL_USER:", process.env.EMAIL_USER);
+//     console.log("Sending email to:", to);
 
-//   const transporter = nodemailer.createTransport({
-//     service: "gmail",
-//     auth: {
-//       user: process.env.EMAIL_USER,
-//       pass: process.env.EMAIL_PASS,
-//     },
-//   });
+//     const transporter = nodemailer.createTransport({
+//       service: "gmail",
+//       auth: {
+//         user: process.env.EMAIL_USER,
+//         pass: process.env.EMAIL_PASS,
+//       },
+//     });
 
-//   await transporter.sendMail({
-//     from: process.env.EMAIL_USER,
-//     to,
-//     subject,
-//     text,
-//   });
+//     const info = await transporter.sendMail({
+//       from: process.env.EMAIL_USER,
+//       to,
+//       subject,
+//       text,
+//     });
+
+//     console.log("Email sent:", info.response);
+
+//   } catch (error: any) {
+//     console.log("EMAIL ERROR:", error.message);
+//     console.log(error);
+//   }
 // };
-
-
 
 
 import nodemailer from "nodemailer";
@@ -32,23 +45,28 @@ export const sendEmail = async (
   try {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
-      port: 587,
-      secure: false,
+      port: 465,
+      secure: true,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
     });
 
-    await transporter.sendMail({
+    await transporter.verify();
+
+    console.log("SMTP VERIFIED");
+
+    const info = await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to,
       subject,
       text,
     });
 
-    console.log("Email sent successfully");
+    console.log("EMAIL SENT:", info.response);
+
   } catch (error) {
-    console.log("MAIL ERROR:", error);
+    console.log("EMAIL ERROR:", error);
   }
 };

@@ -10,6 +10,10 @@ import asyncHandler from "../middlewares/asyncHandler";
 export const register = asyncHandler(async (req: Request, res: Response) => {
   const user = await authService.registerUser(req.body);
 
+
+  console.log("REGISTER EMAIL:", user.email);
+  console.log("REGISTER OTP:", user.otp);
+
   await sendEmail(
     user.email,
     "Verify your account",
