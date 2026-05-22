@@ -39,6 +39,9 @@ const AdminScores = () => {
         </div>
       ))}
     </div>
+
+
+      
   );
 };
 
