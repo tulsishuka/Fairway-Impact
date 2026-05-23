@@ -44,6 +44,7 @@ const SignUp = () => {
     } finally {
       setLoading(false);
     }
+    
   };
 
   return (
@@ -55,77 +56,84 @@ const SignUp = () => {
 
   <div className="relative z-10 w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-16 items-center px-6 md:px-10 py-16">
 
-    <section className="lg:col-span-6 flex flex-col justify-between h-full max-w-xl">
 
+    <section className="lg:col-span-6 flex flex-col justify-center max-w-xl gap-8">
+
+  {/* TOP CONTENT */}
+  <div className="space-y-4">
     
-      <div className="space-y-6">
+    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#141A17] border border-[#1F2823] text-[11px] tracking-[0.2em] uppercase text-[#3EE59D] font-bold w-fit">
+      <span className="w-2 h-2 rounded-full bg-[#3EE59D]" />
+      Premium Golf Impact
+    </div>
 
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#141A17] border border-[#1F2823] text-[11px] tracking-[0.2em] uppercase text-[#3EE59D] font-bold w-fit">
-          <span className="w-2 h-2 rounded-full bg-[#3EE59D]" />
-          Premium Golf Impact
-        </div>
+    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.02]">
+      Fairway{" "}
+      <span className="bg-gradient-to-r from-[#39E596] to-[#2B82F6] bg-clip-text text-transparent">
+        Impact
+      </span>
+    </h1>
 
-        <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.05]">
-          Fairway <span className="bg-gradient-to-r from-[#39E596] to-[#2B82F6] bg-clip-text text-transparent">Impact</span>
-          
-        </h1>
+    <p className="text-[#85B69D] text-sm md:text-base leading-relaxed max-w-lg">
+      Join the exclusive circle of golfers turning every birdie into a catalyst
+      for global change. Professional metrics, cinematic rewards, and transparent
+      philanthropy.
+    </p>
+  </div>
 
-        <p className="text-[#85B69D] text-sm md:text-base leading-relaxed max-w-lg">
-          Join the exclusive circle of golfers turning every birdie into a catalyst for global change.
-          Professional metrics, cinematic rewards, and transparent philanthropy.
+  {/* FEATURE CARDS */}
+  <div className="space-y-4">
+
+    <div className="flex items-start gap-4 p-4 rounded-2xl border border-[#1C2420] bg-black backdrop-blur-sm">
+      
+      <div className="w-11 h-11 rounded-2xl bg-[#1B2430] border border-[#2B3545] flex items-center justify-center shrink-0 text-sky-400">
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+          />
+        </svg>
+      </div>
+
+      <div className="space-y-1">
+        <h4 className="font-semibold text-sm text-white tracking-wide">
+          Precision Metrics
+        </h4>
+
+        <p className="text-xs text-gray-500 leading-relaxed">
+          Real-time stroke tracking, verified handicaps, and elite performance analytics.
         </p>
       </div>
+    </div>
 
-      <div className="space-y-5 mt-4">
-        <div className="flex items-start gap-4 p-4 rounded-2xl border border-[#1C2420] bg-black backdrop-blur-sm">
-          
-          <div className="w-11 h-11 rounded-2xl bg-[#1B2430] border border-[#2B3545] flex items-center justify-center shrink-0 text-sky-400">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-              />
-            </svg>
-          </div>
-
-          <div>
-            <h4 className="font-semibold text-sm text-white tracking-wide">
-              Precision Metrics
-            </h4>
-
-            <p className="text-xs text-gray-500 mt-1 leading-relaxed">
-              Real-time stroke tracking, verified handicaps, and elite performance analytics.
-            </p>
-          </div>
-        </div>
-
-        <div className="flex items-start gap-4 p-4 rounded-2xl border border-[#1C2420] bg-black backdrop-blur-sm">
-          
-          <div className="w-11 h-11 rounded-2xl bg-[#14291D] border border-[#224A34] flex items-center justify-center shrink-0 text-[#3EE59D]">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          </div>
-
-          <div>
-            <h4 className="font-semibold text-sm text-white tracking-wide">
-              Charitable Velocity
-            </h4>
-
-            <p className="text-xs text-gray-500 mt-1 leading-relaxed">
-              Transform rewards into measurable humanitarian impact through verified initiatives.
-            </p>
-          </div>
-        </div>
+    <div className="flex items-start gap-4 p-4 rounded-2xl border border-[#1C2420] bg-black backdrop-blur-sm">
+      
+      <div className="w-11 h-11 rounded-2xl bg-[#14291D] border border-[#224A34] flex items-center justify-center shrink-0 text-[#3EE59D]">
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
       </div>
-    </section>
+
+      <div className="space-y-1">
+        <h4 className="font-semibold text-sm text-white tracking-wide">
+          Charitable Velocity
+        </h4>
+
+        <p className="text-xs text-gray-500 leading-relaxed">
+          Transform rewards into measurable humanitarian impact through verified initiatives.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
 
     <section className="lg:col-span-6 flex justify-center lg:justify-end w-full ">
 

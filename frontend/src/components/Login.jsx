@@ -68,7 +68,7 @@ const Login = () => {
         </div>
 
         {/* Card */}
-        <div className="backdrop-blur-xl  border border-white/[0.08] rounded-3xl p-8 shadow-[0_20px_80px_rgba(0,0,0,0.45)]">
+        <div className="backdrop-blur-xl bg-black  border border-white/[0.08] rounded-3xl p-8 shadow-[0_20px_80px_rgba(0,0,0,0.45)]">
 
           {/* Heading */}
           <div className="mb-8">
@@ -192,7 +192,7 @@ const Login = () => {
             </div>
 
             <div className="relative flex justify-center">
-              <span className="bg-[#111715] px-4 text-[10px] uppercase tracking-[0.3em] text-gray-500">
+              <span className=" px-4 text-[10px] uppercase tracking-[0.3em] text-gray-500">
                 Secure Access
               </span>
             </div>
