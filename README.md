@@ -23,6 +23,7 @@ The goal is to create a platform where user subscriptions can simultaneously:
 3. Provide a transparent impact experience
 
 ---
+<img width="1483" height="600" alt="Screenshot 2026-05-23 224335" src="https://github.com/user-attachments/assets/b81bda4e-04be-4a1a-8cb7-b85cd14ddde9" />
 
 <img width="1898" height="865" alt="Screenshot 2026-05-23 221945" src="https://github.com/user-attachments/assets/9441d160-bd4a-4f53-8070-dd2816d29675" />
 <img width="1896" height="863" alt="Screenshot 2026-05-23 222026" src="https://github.com/user-attachments/assets/0105d809-1363-47d8-b8ce-8d3793629d2b" />
