@@ -23,141 +23,127 @@ const Subscription = () => {
     },
   };
 
-  const makePayment = async (selectedPlan) => {
-    try {
-      if (!token) {
-        alert("Please login first");
-        navigate("/login");
-        return;
-      }
+  // const makePayment = async (selectedPlan) => {
+  //   try {
+  //     if (!token) {
+  //       alert("Please login first");
+  //       navigate("/login");
+  //       return;
+  //     }
 
-      setLoading(true);
-      const amount = plans[selectedPlan].price;
+  //     setLoading(true);
+  //     const amount = plans[selectedPlan].price;
 
-      const { data } = await createOrder({
-        amount,
-        plan: selectedPlan,
-      });
+  //     const { data } = await createOrder({
+  //       amount,
+  //       plan: selectedPlan,
+  //     });
 
-      const options = {
-        key: data.key,
-        amount: data.order.amount,
-        currency: "INR",
-        name: "Digital Heroes",
-        order_id: data.order.id,
+  //     const options = {
+  //       key: data.key,
+  //       amount: data.order.amount,
+  //       currency: "INR",
+  //       name: "Digital Heroes",
+  //       order_id: data.order.id,
 
-        handler: async function (response) {
-          try {
-            const verifyRes = await fetch(
-              "https://givehope-platform-4.onrender.com/api/payment/verify",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(response),
-              }
-            );
+  //       handler: async function (response) {
+  //         try {
+  //           const verifyRes = await fetch(
+  //             "https://givehope-platform-4.onrender.com/api/payment/verify",
+  //             {
+  //               method: "POST",
+  //               headers: {
+  //                 "Content-Type": "application/json",
+  //                 Authorization: `Bearer ${token}`,
+  //               },
+  //               body: JSON.stringify(response),
+  //             }
+  //           );
 
-            const verifyData = await verifyRes.json();
+  //           const verifyData = await verifyRes.json();
 
-            if (verifyData.success) {
-              alert("Payment Successful 🎉");
-              setTimeout(() => {
-                navigate("/charity", { replace: true });
-              }, 500);
-            } else {
-              alert(verifyData.message || "Payment failed");
+  //           if (verifyData.success) {
+  //             alert("Payment Successful 🎉");
+  //             setTimeout(() => {
+  //               navigate("/charity", { replace: true });
+  //             }, 500);
+  //           } else {
+  //             alert(verifyData.message || "Payment failed");
+  //           }
+  //         } catch (err) {
+  //           alert("Verification error");
+  //         }
+  //       },
+  //     };
+
+  //     const razor = new window.Razorpay(options);
+  //     razor.open();
+  //   } catch (err) {
+  //     console.log(err);
+  //     alert(err?.response?.data?.message || "Payment failed");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+const makePayment = async (selectedPlan) => {
+  if (loading) return;
+
+  try {
+    setLoading(true);
+
+    const amount = plans[selectedPlan].price;
+    const { data } = await createOrder({ amount, plan: selectedPlan });
+
+    if (!data?.order?.id) throw new Error("Order ID missing");
+
+    const options = {
+      key: data.key,
+      amount: data.order.amount,
+      currency: "INR",
+      name: "Digital Heroes",   // 🔥 REQUIRED for stability
+      order_id: data.order.id,
+
+      handler: async function (response) {
+        try {
+          const verifyRes = await fetch(
+            "https://givehope-platform-4.onrender.com/api/payment/verify",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify(response),
             }
-          } catch (err) {
-            alert("Verification error");
-          }
-        },
-      };
+          );
 
-      const razor = new window.Razorpay(options);
-      razor.open();
-    } catch (err) {
-      console.log(err);
-      alert(err?.response?.data?.message || "Payment failed");
-    } finally {
-      setLoading(false);
-    }
-  };
+          const verifyData = await verifyRes.json();
+
+          if (verifyData.success) {
+            alert("Payment Successful 🎉");
+            navigate("/charity", { replace: true });
+          } else {
+            alert("Payment verification failed");
+          }
+        } catch (err) {
+          console.log(err);
+          alert("Verification error");
+        }
+      },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
-    // <div className="min-h-screen flex  items-center justify-center  bg-[#06110D] p-3 font-sans text-white">
-
-    //   <div className="max-w-5xl w-full flex flex-col gap-12 items-center z-10">
-    //             <div className="hidden md:flex flex-col items-start space-y-6">
-    //       <h1 className="text-4xl md:text-6xl font-extrabold text-center tracking-tight mb-4 max-w-4xl">
-    //     Impact <span className="text-[#38BDF8]">Precision</span> Pricing
-    //  </h1>
-    //       <p className="text-blue-100/70 text-lg max-w-2xl leading-relaxed">
-    //        Join an elite community of golfers blending championship performance with
-    //   cinematic social impact. Choose your tier of Influence.
-    //       </p>
-         
-    //     </div>
-
-    //     <div className="flex flex-col gap-6">
-    //       <h2 className="text-2xl font-semibold mb-8 md:hidden text-center">Choose Your Plan</h2>
-          
-    //       <div className="flex  gap-5">
-    //         {Object.keys(plans).map((key) => (
-    //           <div
-    //             key={key}
-    //             onClick={() => setPlan(key)}
-    //             className={`relative cursor-pointer p-8 rounded-3xl transition-all duration-300 border-2 
-    //             ${plan === key 
-    //               ? "border-green-400 bg-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(74,222,128,0.2)]" 
-    //               : "border-white/10 bg-white/5 hover:bg-white/10"}`}
-    //           >
-    //             <div className="flex justify-between items-start">
-    //               <div>
-    //                 <h3 className={`text-xl font-bold ${plan === key ? "text-green-400" : "text-white"}`}>
-    //                   {plans[key].label}
-    //                 </h3>
-    //                 <p className="text-sm text-blue-100/60 mt-1">{plans[key].desc}</p>
-    //               </div>
-    //               <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${plan === key ? "border-green-400" : "border-white/30"}`}>
-    //                 {plan === key && <div className="w-3 h-3 bg-green-400 rounded-full" />}
-    //               </div>
-    //             </div>
-                
-    //             <div className="mt-6 flex items-baseline gap-1">
-    //               <span className="text-3xl font-bold">₹{plans[key].price}</span>
-    //               <span className="text-blue-100/50 text-sm">/ {key === 'yearly' ? 'year' : 'month'}</span>
-    //             </div>
-    //           </div>
-    //         ))}
-    //       </div>
-    //       <button
-    //         onClick={() => makePayment(plan)}
-    //         disabled={loading}
-    //         className={`mt-10 w-full py-4 rounded-2xl text-lg font-bold transition-all transform active:scale-95 shadow-xl
-    //         ${loading 
-    //           ? "bg-gray-600 cursor-not-allowed opacity-50" 
-    //           : "bg-green-500 hover:bg-green-400 text-[#050B3E] hover:shadow-green-500/20"}`}
-    //       >
-    //         {loading ? (
-    //           <span className="flex items-center justify-center gap-2">
-    //             <svg className="animate-spin h-5 w-5 text-[#050B3E]" viewBox="0 0 24 24">
-    //               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
-    //               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-    //             </svg>
-    //             Processing...
-    //           </span>
-    //         ) : (
-    //           `Complete Payment for ${plan.charAt(0).toUpperCase() + plan.slice(1)}`
-    //         )}
-    //       </button>
-          
-         
-    //     </div>
-    //   </div>
-    // </div>
 
 
     <div className="min-h-screen bg-[#06110D] text-white px-4 py-6 flex items-center justify-center overflow-hidden">
