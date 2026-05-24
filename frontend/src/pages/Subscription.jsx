@@ -68,7 +68,7 @@ const Subscription = () => {
         razorRef.current.close?.();
         razorRef.current = null;
       }
-
+console.log("Razorpay instance cleared");
       await new Promise((res) => setTimeout(res, 300));
 
       const options = {
@@ -150,10 +150,12 @@ console.log("ORDER ID =>", data.order.id);
         },
       };
 
-      console.log("Opening Razorpay checkout");
-console.log("Razorpay options:", options);
-      const rzp = new window.Razorpay(options);
 
+
+console.log("Razorpay options prepared:", options);
+   
+      const rzp = new window.Razorpay(options);
+console.log(window.Razorpay);
       // payment failed listener
       rzp.on("payment.failed", function (response) {
         console.log("PAYMENT FAILED:", response.error);
@@ -178,6 +180,7 @@ console.log("Razorpay options:", options);
       lockRef.current = false;
     }
     console.log("makePayment function completed for:", selectedPlan);
+    console.log(window.Razorpay);
   };
 
   return (
@@ -186,15 +189,15 @@ console.log("Razorpay options:", options);
 
         {/* HEADING */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
             Impact{" "}
-            <span className="text-[#38BDF8]">
+            <span className="bg-gradient-to-r from-[#39E596] to-[#2B82F6] bg-clip-text text-transparent">
               Precision
             </span>{" "}
             Pricing
           </h1>
 
-          <p className="mt-6 text-[#C9FCE1] text-sm sm:text-base max-w-2xl mx-auto leading-7">
+          <p className="mt-6 text-[#C9FCE1] text-sm sm:text-base max-w-xl mx-auto leading-7">
             Join an elite community of golfers blending championship
             performance with cinematic social impact.
           </p>
