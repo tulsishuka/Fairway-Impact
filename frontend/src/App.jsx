@@ -23,7 +23,6 @@ import UserLayout from './pages/user/UserLayout';
 import UserDashboard from './pages/user/UserDashboard';
 import UserScores from './pages/user/UserScore';
 import UserCharities from './pages/user/UserCharity';
-
 import UserCharity from './pages/user/UserCharity';
 const App = () => {
   return (
@@ -38,8 +37,8 @@ const App = () => {
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/Subscription" element={<Subscription />} />
             <Route path="/Dashboard" element={<DashBoard />} />
-                              <Route path="/UserCharity" element={<UserCharity />} />
                               <Route path="/UserScores" element={<UserScores />} />
+      <Route path="/UserCharity" element={<UserCharity />} />
 
                               <Route path="/About" element={<About />} />
 

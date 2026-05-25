@@ -40,7 +40,7 @@ const SignUp = () => {
         password: "",
       });
     } catch (error) {
-      toast.error(error.response?.data?.message || "Something went wrong");
+      toast.error(error.response?.data?.message || "Your account already exists");
     } finally {
       setLoading(false);
     }
