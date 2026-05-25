@@ -133,7 +133,7 @@ console.log("ORDER ID =>", data.order.id);
             if (verifyData.success) {
               alert("Payment Successful 🎉");
 
-              navigate("/UserCharity");
+              navigate("/usercharity");
             } else {
               alert(
                 verifyData.message || "Payment verification failed"
