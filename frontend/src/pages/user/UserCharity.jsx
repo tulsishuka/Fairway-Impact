@@ -86,7 +86,7 @@ const UserCharity = () => {
     alert("Charity saved successfully ❤️");
 
     setTimeout(() => {
-      navigate("/userdashboard", { replace: true });
+      navigate("/user", { replace: true });
     }, 500);
 
   } catch (err) {
