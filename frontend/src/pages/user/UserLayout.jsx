@@ -8,6 +8,7 @@ const UserLayout = () => {
     { name: "Dashboard", path: "/user" },
     { name: "Score Entry", path: "/user/scores" },
     { name: "Charities", path:"/user/charities" },
+     { name: "Winner", path:"/user/winner" },
   ];
 
   return (
