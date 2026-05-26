@@ -3,6 +3,7 @@ import { Response } from "express";
 import { AuthRequest } from "../interfaces/authRequest.interface";
 import { User } from "../models/userModel";
 import Charity from "../models/Charity";
+import { Document, DefaultSchemaOptions, Types } from "mongoose";
 
 // ✅ Select Charity (already exists but cleaned)
 export const selectCharity = async (req: AuthRequest, res: Response) => {
@@ -78,6 +79,18 @@ export const updateDonationPercentage = async (
     });
   } catch (err) {
     console.error(err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+export const getCharities = async (req: AuthRequest, res: Response) => {
+  try {
+    const charities = await Charity.find();
+    return res.json({
+      success: true,
+      data: charities,
+    });
+  } catch (err) {
+    console.log(err);
     return res.status(500).json({ message: "Server error" });
   }
 };
