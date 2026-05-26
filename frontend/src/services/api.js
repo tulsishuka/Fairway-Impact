@@ -26,3 +26,9 @@ export const getScores = () =>
 
 
 
+export const selectCharity = (data) =>
+  API.post("/api/charity/select", data);
+
+
+export const updateCharityPercentage = (donationPercentage) =>
+  API.put("/api/charity/update-percentage", { donationPercentage });
