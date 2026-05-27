@@ -1,5 +1,6 @@
-
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+import { isSubscriptionActive } from "../utils/isSubscriptionActive";
 import React, { useState, useRef,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { createOrder } from "../services/api";
@@ -127,7 +128,10 @@ console.log("Razorpay instance cleared");
               alert("Payment Successful 🎉");
 
               navigate("/usercharity");
-            } else {
+
+            }
+   
+             else {
               alert(
                 verifyData.message || "Payment verification failed"
               );
@@ -175,7 +179,7 @@ console.log(window.Razorpay);
     console.log(window.Razorpay);
   };
 
-  useEffect(() => {
+ useEffect(() => {
   const checkUser = async () => {
     const token = localStorage.getItem("token");
 
@@ -190,8 +194,10 @@ console.log(window.Razorpay);
 
     const data = await res.json();
 
-    if (data.user.subscriptionStatus === "active") {
-      navigate("/user"); // or dashboard
+    const user = data.user;
+
+    if (isSubscriptionActive(user)) {
+      navigate("/user");
     }
   };
 
