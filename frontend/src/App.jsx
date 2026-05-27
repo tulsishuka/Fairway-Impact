@@ -13,7 +13,6 @@ import Dashboard from './pages/admin/Dashboard';
 import AdminUsers from './pages/admin/AdminUsers';
 import AdminScores from './pages/admin/AdminScores';
 import AdminDraw from './pages/admin/AdminDraw';
-import AdminWinners from './pages/admin/AdminWinners';
 import AdminCharities from './pages/admin/AdminCharities';
 import About from './pages/About';
 import { ToastContainer } from "react-toastify";
@@ -24,7 +23,6 @@ import UserDashboard from './pages/user/UserDashboard';
 import UserScores from './pages/user/UserScore';
 import UserCharities from './pages/user/UserCharity';
 import UserCharity from './pages/user/UserCharity';
-import UserWinner from './pages/user/UserWinner';
 import WinnerVerification from './pages/admin/WinnerVerification';
 import UserResults from './pages/user/UserResults';
 const App = () => {
@@ -42,7 +40,6 @@ const App = () => {
             <Route path="/Dashboard" element={<DashBoard />} />
                               <Route path="/UserScores" element={<UserScores />} />
       <Route path="/UserCharity" element={<UserCharity />} />
-      <Route path="/winner" element={<UserWinner />} />
 
                               <Route path="/About" element={<About />} />
 
@@ -53,8 +50,6 @@ const App = () => {
       <Route path="users" element={<AdminUsers />} />
       <Route path="scores" element={<AdminScores />} />
       <Route path="draw" element={<AdminDraw />} />
-      <Route path="winners" element={<AdminWinners />} />
-      <Route path="charities" element={<AdminCharities />} />
       <Route path="charities" element={<AdminCharities />} />
       <Route path="winnerverification" element={<WinnerVerification />} />  
 
@@ -67,8 +62,6 @@ const App = () => {
       <Route path="scores" element={<UserScores />} />
      
       <Route path="charities" element={<UserCharities />} />
-      <Route path="winner" element={<UserWinner />} />
-            <Route path="winner" element={<UserWinner />} />
       <Route path="results" element={<UserResults />} />
 
     </Route>
