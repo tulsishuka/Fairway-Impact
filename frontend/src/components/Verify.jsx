@@ -31,7 +31,7 @@ const Verify = () => {
       toast.success(res.data.message || "Verified successfully ❤️");
 
       setTimeout(() => {
-        navigate("/Subscription");
+        navigate("/login");
       }, 1000);
 
     } catch (error) {
