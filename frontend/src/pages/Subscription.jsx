@@ -12,7 +12,6 @@ const Subscription = () => {
 
   const navigate = useNavigate();
 
-  const token = localStorage.getItem("token");
 
   const razorRef = useRef(null);
   const lockRef = useRef(false);
@@ -31,154 +30,216 @@ const Subscription = () => {
     },
   };
 
-  const makePayment = async (selectedPlan) => {
-    if (lockRef.current) return;
+ 
 
-    if (!token) {
-      alert("Please login again");
-      navigate("/login");
-      return;
+    
+const makePayment = async (selectedPlan) => {
+
+  if (lockRef.current) return;
+
+  const token = localStorage.getItem("token");
+
+  console.log("TOKEN =>", token);
+
+  if (!token) {
+    alert("Please login again");
+    navigate("/login");
+    return;
+  }
+
+  try {
+
+    lockRef.current = true;
+
+    setLoadingPlan(selectedPlan);
+
+    const amount = plans[selectedPlan].price;
+
+    const { data } = await createOrder({
+      amount,
+      plan: selectedPlan,
+    });
+
+    console.log("CREATE ORDER RESPONSE =>", data);
+
+    if (!data?.order?.id) {
+      throw new Error("Order ID missing");
     }
 
-    try {
-      lockRef.current = true;
+    // close previous razorpay instance
+    if (razorRef.current) {
+      razorRef.current.close?.();
+      razorRef.current = null;
+    }
 
-      setLoadingPlan(selectedPlan);
+    console.log("Razorpay instance cleared");
 
+    await new Promise((res) => setTimeout(res, 300));
 
-      const amount = plans[selectedPlan].price;
+    const options = {
 
+      key: data.key,
 
-      const { data } = await createOrder({
-        amount,
-        plan: selectedPlan,
-      });
+      amount: data.order.amount,
 
-      console.log("Order created:", data);
+      currency: "INR",
 
-      if (!data?.order?.id) {
-        throw new Error("Order ID missing");
-      }
+      name: "Digital Heroes",
 
-      if (razorRef.current) {
-        razorRef.current.close?.();
-        razorRef.current = null;
-      }
-console.log("Razorpay instance cleared");
-      await new Promise((res) => setTimeout(res, 300));
+      description: "Subscription Payment",
 
-      const options = {
-        key: data.key,
+      order_id: data.order.id,
 
-        amount: data.order.amount,
+      prefill: {
+        name: "Test User",
+        email: "test@example.com",
+        contact: "9999999999",
+      },
 
-        currency: "INR",
+      theme: {
+        color: "#38BDF8",
+      },
 
-        name: "Digital Heroes",
+      modal: {
+        ondismiss: function () {
 
-        order_id: data.order.id,
+          console.log("Checkout closed");
 
-        prefill: {
-          name: "Test User",
-          email: "test@example.com",
-          contact: "9999999999",
+          setLoadingPlan(null);
+
+          lockRef.current = false;
         },
+      },
 
+      handler: async function (response) {
 
-        theme: {
-          color: "#38BDF8",
-        },
+        try {
 
-        modal: {
-          ondismiss: function () {
-            console.log("Checkout closed");
+          console.log(
+            "Payment Success Response:",
+            response
+          );
 
-            setLoadingPlan(null);
+          const verifyRes = await fetch(
+            "https://givehope-platform-4.onrender.com/api/payment/verify",
+            {
+              method: "POST",
 
-            lockRef.current = false;
-          },
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
 
-        },
-
-
-        handler: async function (response) {
-          try {
-            console.log("Payment Success Response:", response);
-
-            const verifyRes = await fetch(
-              "https://givehope-platform-4.onrender.com/api/payment/verify",
-              {
-                method: "POST",
-
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${token}`,
-                },
-
-                body: JSON.stringify(response),
-              }
-            );
-
-
-            const verifyData = await verifyRes.json();
-
-            console.log("VERIFY RESPONSE:", verifyData);
-
-            // if (verifyData.success) {
-            if (verifyRes.ok && verifyData.success) {
-              alert("Payment Successful 🎉");
-
-              navigate("/usercharity");
-
+              body: JSON.stringify(response),
             }
-   
-             else {
-              alert(
-                verifyData.message || "Payment verification failed"
+          );
+
+          const verifyData = await verifyRes.json();
+
+          console.log(
+            "VERIFY RESPONSE =>",
+            verifyData
+          );
+
+          if (
+            verifyRes.ok &&
+            verifyData.success
+          ) {
+
+            // SAVE UPDATED USER
+            if (verifyData.user) {
+
+              localStorage.setItem(
+                "user",
+                JSON.stringify(verifyData.user)
+              );
+
+              console.log(
+                "UPDATED USER SAVED"
               );
             }
-          } catch (err) {
 
-            alert("Verification failed");
-          } finally {
-            setLoadingPlan(null);
+            alert("Payment Successful 🎉");
 
-            lockRef.current = false;
+            // FULL REFRESH
+            window.location.href =
+              "/usercharity";
+
+          } else {
+
+            alert(
+              verifyData.message ||
+              "Payment verification failed"
+            );
           }
-        },
-      };
 
+        } catch (err) {
 
+          console.log(
+            "VERIFY ERROR =>",
+            err
+          );
 
-console.log("Razorpay options prepared:", options);
-   
-      const rzp = new window.Razorpay(options);
-console.log(window.Razorpay);
-      rzp.on("payment.failed", function (response) {
-        console.log("PAYMENT FAILED:", response.error);
+          alert("Verification failed");
+
+        } finally {
+
+          setLoadingPlan(null);
+
+          lockRef.current = false;
+        }
+      },
+    };
+
+    console.log(
+      "Razorpay options prepared:",
+      options
+    );
+
+    const rzp = new window.Razorpay(options);
+
+    console.log(window.Razorpay);
+
+    rzp.on(
+      "payment.failed",
+      function (response) {
+
+        console.log(
+          "PAYMENT FAILED:",
+          response.error
+        );
 
         alert(response.error.description);
 
         setLoadingPlan(null);
 
         lockRef.current = false;
-      });
+      }
+    );
 
-      razorRef.current = rzp;
+    razorRef.current = rzp;
 
-      rzp.open();
-    } catch (err) {
-      console.log("Payment Error:", err);
+    rzp.open();
 
-      alert("Something went wrong");
-      
-      setLoadingPlan(null);
+  } catch (err) {
 
-      lockRef.current = false;
-    }
-    console.log("makePayment function completed for:", selectedPlan);
-    console.log(window.Razorpay);
-  };
+    console.log("Payment Error:", err);
+
+    alert("Something went wrong");
+
+    setLoadingPlan(null);
+
+    lockRef.current = false;
+  }
+
+  console.log(
+    "makePayment function completed for:",
+    selectedPlan
+  );
+
+  console.log(window.Razorpay);
+};
+
 
 
   return (
