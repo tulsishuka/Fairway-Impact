@@ -26,9 +26,7 @@ export const register = asyncHandler(async (req: Request, res: Response) => {
   });
 });
 
-/**
- * @desc Verify account using OTP
- */
+
 export const verify = asyncHandler(async (req: Request, res: Response) => {
   const { email, otp } = req.body;
 
@@ -39,8 +37,6 @@ export const verify = asyncHandler(async (req: Request, res: Response) => {
     message: "Account verified successfully",
   });
 });
-
-
 
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
