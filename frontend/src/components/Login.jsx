@@ -25,7 +25,7 @@ const Login = () => {
 
     try {
       const res = await axios.post(
-        "https://givehope-platform-4.onrender.com/api/v1/auth/login",
+        "https://fairway-impact.onrender.com/api/v1/auth/login",
         formData
       );
 
