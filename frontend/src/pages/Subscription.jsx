@@ -121,7 +121,7 @@ const makePayment = async (selectedPlan) => {
           );
 
           const verifyRes = await fetch(
-            "https://givehope-platform-4.onrender.com/api/payment/verify",
+            "https://fairway-impact.onrender.com/api/payment/verify",
             {
               method: "POST",
 
