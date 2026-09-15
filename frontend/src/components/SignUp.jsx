@@ -26,7 +26,7 @@ const SignUp = () => {
     setLoading(true);
     try {
       const res = await axios.post(
-        "https://givehope-platform-4.onrender.com/api/v1/auth/register",
+        "https://fairway-impact.onrender.com/api/v1/auth/register",
         formData
       );
       toast.success("Account created successfully ❤️");
