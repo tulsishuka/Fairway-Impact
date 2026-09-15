@@ -24,7 +24,7 @@ const Verify = () => {
       setLoading(true);
 
       const res = await axios.post(
-        "https://givehope-platform-4.onrender.com/api/v1/auth/verify-otp",
+        "https://fairway-impact.onrender.com/api/v1/auth/verify-otp",
         { email, otp }
       );
 
