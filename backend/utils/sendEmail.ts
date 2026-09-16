@@ -18,7 +18,7 @@ export const sendEmail = async (
 
     const sender = {
       email: "tulsishuklag@gmail.com",
-      name: "GiveHope",
+      name: "FairwayImpact",
     };
 
     const receivers = [
