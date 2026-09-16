@@ -12,7 +12,7 @@ const AdminDraw = () => {
   const runDraw = async () => {
     try {
       const res = await axios.post(
-        "https://givehope-platform-4.onrender.com/api/draw/run",
+        "https://fairway-impact.onrender.com/api/draw/run",
         { type },
         {
           headers: { Authorization: `Bearer ${token}` },

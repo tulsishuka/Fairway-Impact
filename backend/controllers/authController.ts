@@ -72,3 +72,4 @@ export const forgot = asyncHandler(async (req: Request, res: Response) => {
     message: "Password updated successfully.",
   });
 });
+

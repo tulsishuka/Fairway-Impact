@@ -14,7 +14,7 @@ const Dashboard = () => {
   const fetchStats = async () => {
     try {
       const res = await axios.get(
-        "https://givehope-platform-4.onrender.com/api/admin/analytics",
+        "https://fairway-impact.onrender.com/api/admin/analytics",
         {
           headers: { Authorization: `Bearer ${token}` },
         }

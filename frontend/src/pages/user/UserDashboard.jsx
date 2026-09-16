@@ -17,7 +17,7 @@ const fetchResults = async () => {
     const token = localStorage.getItem("token");
 
     const res = await axios.get(
-      "https://givehope-platform-4.onrender.com/api/results/my-results",
+      "https://fairway-impact.onrender.com/api/results/my-results",
       {
         headers: {
           Authorization: `Bearer ${token}`,

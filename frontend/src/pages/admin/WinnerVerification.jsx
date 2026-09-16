@@ -13,7 +13,7 @@ const WinnerVerification = () => {
     try {
 
       const res = await axios.get(
-        "https://givehope-platform-4.onrender.com/api/results/all",
+        "https://fairway-impact.onrender.com/api/results/all",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -37,7 +37,7 @@ const WinnerVerification = () => {
     try {
 
       await axios.put(
-        `https://givehope-platform-4.onrender.com/api/results/verify/${id}`,
+        `https://fairway-impact.onrender.com/api/results/verify/${id}`,
         { status },
         {
           headers: {
@@ -111,7 +111,7 @@ const WinnerVerification = () => {
                 {r.proofImage && (
               
                     <img
-  src={`https://givehope-platform-4.onrender.com/uploads/${r.proofImage}`}
+  src={`https://fairway-impact.onrender.com/uploads/${r.proofImage}`}
   alt="proof"
   className="max-w-[300px] max-h-[300px] object-contain rounded-2xl mt-4 border border-gray-700 bg-black"
 />

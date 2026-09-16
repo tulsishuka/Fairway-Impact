@@ -13,7 +13,7 @@ const UserResults = () => {
     try {
 
     const res = await axios.get(
-  "https://givehope-platform-4.onrender.com/api/results/my-results",
+  "https://fairway-impact.onrender.com/api/results/my-results",
   {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -43,7 +43,7 @@ const uploadProof = async (resultId, file) => {
     formData.append("image", file);
 
     await axios.post(
-      `https://givehope-platform-4.onrender.com/api/results/upload-proof/${resultId}`,
+      `https://fairway-impact.onrender.com/api/results/upload-proof/${resultId}`,
       formData,
       {
         headers: {

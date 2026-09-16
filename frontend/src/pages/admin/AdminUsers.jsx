@@ -11,7 +11,7 @@ const AdminUsers = () => {
   const fetchUsers = async () => {
     try {
       const res = await axios.get(
-        "https://givehope-platform-4.onrender.com/api/admin/users",
+        "https://fairway-impact.onrender.com/api/admin/users",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -32,7 +32,7 @@ const AdminUsers = () => {
   const deleteUser = async (id) => {
     try {
       await axios.delete(
-        `https://givehope-platform-4.onrender.com/api/admin/user/${id}`,
+        `https://fairway-impact.onrender.com/api/admin/user/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ const AdminUsers = () => {
   const updateStatus = async (id, status) => {
     try {
       await axios.post(
-        "https://givehope-platform-4.onrender.com/api/admin/user/update",
+        "https://fairway-impact.onrender.com/api/admin/user/update",
         { userId: id, status },
         {
           headers: {

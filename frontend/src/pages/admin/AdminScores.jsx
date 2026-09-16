@@ -15,7 +15,7 @@ const AdminScores = () => {
   const fetchScores = async () => {
     try {
       const res = await axios.get(
-        "https://givehope-platform-4.onrender.com/api/admin/users-with-scores",
+        "https://fairway-impact.onrender.com/api/admin/users-with-scores",
         {
           headers: { Authorization: `Bearer ${token}` },
         }

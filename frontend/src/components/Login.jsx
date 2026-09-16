@@ -28,7 +28,6 @@ const Login = () => {
         "https://fairway-impact.onrender.com/api/v1/auth/login",
         formData
       );
-
       const { token, subscriptionStatus, user } = res.data;
 
       localStorage.setItem("token", token);

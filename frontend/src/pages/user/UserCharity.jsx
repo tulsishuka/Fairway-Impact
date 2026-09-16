@@ -39,7 +39,7 @@ const UserCharity = () => {
   useEffect(() => {
     const fetchCharities = async () => {
       try {
-        const res = await axios.get("https://givehope-platform-4.onrender.com/api/charity");
+        const res = await axios.get("https://fairway-impact.onrender.com/api/charity");
         const data = res.data.data || [];
         setCharities(data);
 
@@ -83,7 +83,7 @@ const UserCharity = () => {
 
 
       await axios.post(
-        "https://givehope-platform-4.onrender.com/api/charity/select",
+        "https://fairway-impact.onrender.com/api/charity/select",
         {
           charityId: selected._id,
           percentage: percentage, 

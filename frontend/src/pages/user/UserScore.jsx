@@ -21,7 +21,7 @@ const [scoreDate, setScoreDate] = useState("");
 
 const fetchScores = async () => {
   try {
-    const res = await fetch("https://givehope-platform-4.onrender.com/api/score", {
+    const res = await fetch("https://fairway-impact.onrender.com/api/score", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -49,7 +49,7 @@ const addScore = async () => {
     }
 
     await fetch(
-     "https://givehope-platform-4.onrender.com/api/score/add",
+     "https://fairway-impact.onrender.com/api/score/add",
       {
         method: "POST",
         headers: {

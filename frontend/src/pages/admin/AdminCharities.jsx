@@ -13,7 +13,9 @@ const AdminCharities = () => {
   const fetchCharities = async () => {
     try {
       const res = await axios.get(
-        "https://givehope-platform-4.onrender.com/api/admin/charity",
+        // "https://givehope-platform-4.onrender.com/api/admin/charity",
+                "https://fairway-impact.onrender.com/api/admin/charity",
+
         {
           headers: { Authorization: `Bearer ${token}` },
         }
