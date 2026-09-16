@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import { User } from "../models/userModel";
 
- const MONGO_URI= "mongodb+srv://tulsishuklag:mongodbfirst@cluster0.vdfztqx.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=Cluster0"
+ const MONGO_URI= "mongodb+srv://tulsishuklag:mongodbfirst@cluster0.vdfztqx.mongodb.net/digital?appName=Cluster0";
 const createAdmin = async () => {
   try {
     await mongoose.connect(MONGO_URI);
