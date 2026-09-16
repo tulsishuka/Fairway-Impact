@@ -21,7 +21,7 @@ app.use(
 const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:5173",
-  "https://fairway-impact.onrender.com/"
+  "https://fairway-impact-five.vercel.app"
 ];
 
 app.use(
