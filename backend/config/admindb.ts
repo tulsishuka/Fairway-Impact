@@ -12,6 +12,7 @@ const createAdmin = async () => {
     if (existingAdmin) {
       process.exit();
     }
+    
 
     const hashedPassword = await bcrypt.hash("admin123", 10);
 
