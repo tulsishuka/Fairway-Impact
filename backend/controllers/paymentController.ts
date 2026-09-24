@@ -125,14 +125,7 @@ console.log("Prize pool updated for month:", month, "with amount:", prizeAmount)
   { new: true }
 );
 
-    // await User.findByIdAndUpdate(user._id, {
-    //   subscriptionStatus: "active",
-    //   subscriptionPlan: payment.plan,
-    //   subscriptionStart: new Date(),
-    //   subscriptionEnd: new Date(
-    //     Date.now() + 30 * 24 * 60 * 60 * 1000
-    //   ),
-    // });
+
 
   
 
