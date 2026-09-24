@@ -44,7 +44,7 @@ export const createDraw = async (req: Request, res: Response) => {
 export const runDraw = async (req: Request, res: Response) => {
   try {
     // const numbers = generateNumbers();
-    const numbers = [10, 20, 30, 40, 45];
+    const numbers = [5, 6, 7, 8, 9];
 
     const draw = await Draw.create({
       numbers,
